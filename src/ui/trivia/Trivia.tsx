@@ -4,6 +4,7 @@ import loadingImg from "../../assets/loading.png";
 import { sleep } from "../../application/utils";
 import { useNavigate } from "react-router-dom";
 import Button from "../components/Button";
+import Modal from "../components/Modal";
 
 function Trivias() {
   const {
@@ -19,6 +20,7 @@ function Trivias() {
   const navigate = useNavigate();
   const { choosenCategory, choosenDifficulty } = useConfigStore();
   const [response, setResponse] = useState<string | null>(null);
+  const [modal, setModal] = useState(false);
 
   useEffect(() => {
     setCurrentTriviaIndex(0);
@@ -50,6 +52,8 @@ function Trivias() {
 
   return (
     <div className="h-full w-full flex flex-col gap-20 items-center justify-center">
+      <Button title="Leave" className="absolute top-5 left-5 bg-transparent border-2 border-text hover:border-white hover:bg-primary hover:text-white" onClick={() => setModal(true)} />
+      <Modal open={modal} close={()=>setModal(false)} />
       <h1 className="text-4xl w-2/3 text-center font-semibold">{!loading && trivias[currentTriviaIndex]?.question}</h1>
       <div className="flex gap-20 justify-around">
         {loading && <img src={loadingImg} className="w-20 animate-spin" alt="Loading..." />}
