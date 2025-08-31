@@ -2,7 +2,7 @@ import { describe, expect, test } from "@jest/globals";
 import { getCategories, getTrivias } from "../services/openTrivia";
 import { decodeHtmlEntities } from "../application/utils";
 import type { Trivia } from "../types/openTrivia";
-import { shuffleAnswers } from '../application/trivia';
+import { shuffleAnswers } from "../application/trivia";
 
 describe("Traer trivias y categorias", () => {
   afterEach(async () => {
@@ -27,6 +27,9 @@ describe("Traer trivias y categorias", () => {
     const categories = await getCategories();
     expect(categories.trivia_categories.length).toBeGreaterThan(0);
   });
+});
+
+describe("Process response", () => {
   test("Decode response", () => {
     const codedString =
       "In the movie &quot;Back to the Future,&quot; what speed does Doc Brown&#039;s DeLorean need to reach in order to travel through time?";
@@ -45,8 +48,8 @@ describe("Traer trivias y categorias", () => {
       correct_answer: "2004",
       incorrect_answers: ["2006", "2008", "2002"],
     };
-    const unshuffled = [...trivia.incorrect_answers, trivia.correct_answer]
-    trivia.shuffledAnswers = shuffleAnswers(trivia)
-    expect(trivia.shuffledAnswers).not.toEqual(unshuffled)
+    const unshuffled = [...trivia.incorrect_answers, trivia.correct_answer];
+    trivia.shuffledAnswers = shuffleAnswers(trivia);
+    expect(trivia.shuffledAnswers).not.toEqual(unshuffled);
   });
 });
