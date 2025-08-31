@@ -7,6 +7,7 @@ import type {
 } from "../types/openTrivia";
 import { decodeHtmlEntities } from "../application/utils";
 import { shuffleAnswers } from "../application/trivia";
+import { useConfigStore } from "./store";
 
 export const getTrivias = async ({
   difficulty,
@@ -15,6 +16,7 @@ export const getTrivias = async ({
   difficulty: string | null;
   category: number | null;
 }): Promise<RequestTriviaResponse> => {
+  const { token } = useConfigStore.getState();
   const url = "https://opentdb.com/api.php";
   const response = await axios.get(url, {
     params: {
@@ -22,6 +24,7 @@ export const getTrivias = async ({
       type: "multiple",
       difficulty,
       category,
+      token
     },
   });
   response.data.results.forEach((trivia: Trivia) => {
