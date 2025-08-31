@@ -3,3 +3,5 @@ export function decodeHtmlEntities(text: string) {
   textarea.innerHTML = text;
   return textarea.value;
 }
+
+export const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
