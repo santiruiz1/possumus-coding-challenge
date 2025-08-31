@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { getCategories, getToken, getTrivias } from "./openTrivia";
-import type { Category, Trivia } from "../types/openTrivia";
+import type { Trivia } from "../types/openTrivia";
+import type { SelectCategory } from "../application/trivia";
 
 export type TriviaState = {
   points: number;
@@ -19,7 +20,7 @@ export type TriviaState = {
 
 export type ConfigState = {
   token: string | null
-  categories: Category[];
+  categories: SelectCategory[];
   choosenCategory: number | null;
   choosenDifficulty: string | null;
   loading: boolean;
@@ -90,12 +91,16 @@ export const useConfigStore = create<ConfigState>((set) => ({
   setCategories: async () => {
     set({ loading: true, error: null });
     try {
-      const categories = await getCategories();
+      const rawCategories = await getCategories();
       if (
-        categories.trivia_categories &&
-        categories.trivia_categories.length > 0
+        rawCategories.trivia_categories &&
+        rawCategories.trivia_categories.length > 0
       ) {
-        set({ categories: categories.trivia_categories, loading: false });
+        const categories = rawCategories.trivia_categories.map((category) => ({
+          value: category.id.toString(),
+          label: category.name,
+        }));
+        set({ categories, loading: false });
         return;
       }
       set({ error: "No categories found" });
