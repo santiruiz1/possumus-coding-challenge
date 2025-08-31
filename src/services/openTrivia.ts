@@ -2,7 +2,9 @@ import axios from "axios";
 import type {
   RequestCategoriesResponse,
   RequestTriviaResponse,
+  Trivia,
 } from "../types/openTrivia";
+import { decodeHtmlEntities } from "../application/utils";
 
 export const getTrivias = async ({
   difficulty,
@@ -19,6 +21,13 @@ export const getTrivias = async ({
       difficulty,
       category,
     },
+  });
+  response.data.results.forEach((trivia: Trivia) => {
+    trivia.question = decodeHtmlEntities(trivia.question);
+    trivia.correct_answer = decodeHtmlEntities(trivia.correct_answer);
+    trivia.incorrect_answers = trivia.incorrect_answers.map((answer) =>
+      decodeHtmlEntities(answer)
+    );
   });
   return response.data;
 };

@@ -1,5 +1,6 @@
 import { describe, expect, test } from "@jest/globals";
 import { getCategories, getTrivias } from "../services/openTrivia";
+import { decodeHtmlEntities } from "../application/utils";
 
 describe("Traer trivias y categorias", () => {
   afterEach(async () => {
@@ -23,5 +24,10 @@ describe("Traer trivias y categorias", () => {
   test('Traer las categorías disponibles', async () => {
     const categories = await getCategories();
     expect(categories.trivia_categories.length).toBeGreaterThan(0);
+  })
+  test('Decode response', () => {
+    const codedString = "In the movie &quot;Back to the Future,&quot; what speed does Doc Brown&#039;s DeLorean need to reach in order to travel through time?"
+    const decodedString = decodeHtmlEntities(codedString)
+    expect(decodedString).toEqual(`In the movie "Back to the Future," what speed does Doc Brown's DeLorean need to reach in order to travel through time?`)
   })
 });
