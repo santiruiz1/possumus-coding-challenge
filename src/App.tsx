@@ -2,6 +2,8 @@ import { Route, Routes } from "react-router-dom";
 import { useEffect } from "react";
 import { useConfigStore } from "./services/store";
 import Home from "./ui/home/Home";
+import Trivias from "./ui/trivia/Trivia";
+import Result from "./ui/result/Result";
 
 function App() {
   const { setCategories, setToken } = useConfigStore();
@@ -13,8 +15,8 @@ function App() {
     <main className="w-full h-dvh font-mulish text-text  bg-gradient-to-r from-white from-15% via-primary to-primary flex flex-col">
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/trivias" element={<div>HELLO</div>} />
-        <Route path="/result" element={<div>CIAO</div>} />
+        <Route path="/trivias" element={<Trivias />} />
+        <Route path="/result" element={<Result />} />
         <Route path="*" element={<div>NOT FOUND</div>} />
       </Routes>
       <footer className="">Made by Santiago Ruiz♥️</footer>
