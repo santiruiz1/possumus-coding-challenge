@@ -14,8 +14,10 @@ export type Trivia = {
 };
 
 export type RequestCategoriesResponse = {
-  trivia_categories: { name: string; id: number }[];
+  trivia_categories: Category[];
 };
+
+export type Category = { name: string; id: number };
 
 export type RequestTokenResponse = {
   response_code: number;
