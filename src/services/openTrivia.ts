@@ -5,6 +5,7 @@ import type {
   Trivia,
 } from "../types/openTrivia";
 import { decodeHtmlEntities } from "../application/utils";
+import { shuffleAnswers } from "../application/trivia";
 
 export const getTrivias = async ({
   difficulty,
@@ -28,6 +29,7 @@ export const getTrivias = async ({
     trivia.incorrect_answers = trivia.incorrect_answers.map((answer) =>
       decodeHtmlEntities(answer)
     );
+    trivia.shuffledAnswers = shuffleAnswers(trivia);
   });
   return response.data;
 };

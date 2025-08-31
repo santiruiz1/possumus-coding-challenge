@@ -10,6 +10,7 @@ export type Trivia = {
   question: string;
   correct_answer: string;
   incorrect_answers: string[];
+  shuffledAnswers?: string[];
 };
 
 export type RequestCategoriesResponse = {
