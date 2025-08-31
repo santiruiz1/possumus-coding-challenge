@@ -1,26 +1,24 @@
-import { useState } from 'react'
+import { Route, Routes } from "react-router-dom";
+import { useEffect } from "react";
+import { useConfigStore } from "./services/store";
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  const { setCategories, setToken } = useConfigStore();
+  useEffect(() => {
+    setCategories();
+    setToken();
+  }, []);
   return (
-    <>
-      <div>
-      </div>
-      <h1 className='text-sm'>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <main className="w-full h-dvh font-mulish text-text  bg-gradient-to-r from-white from-15% via-primary to-primary flex flex-col">
+      <Routes>
+        <Route path="/" element={<div>HOLA</div>} />
+        <Route path="/trivias" element={<div>HELLO</div>} />
+        <Route path="/result" element={<div>CIAO</div>} />
+        <Route path="*" element={<div>NOT FOUND</div>} />
+      </Routes>
+      <footer className="">Made by Santiago Ruiz♥️</footer>
+    </main>
+  );
 }
 
-export default App
+export default App;
