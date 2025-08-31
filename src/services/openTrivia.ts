@@ -1,6 +1,7 @@
 import axios from "axios";
 import type {
   RequestCategoriesResponse,
+  RequestTokenResponse,
   RequestTriviaResponse,
   Trivia,
 } from "../types/openTrivia";
@@ -39,3 +40,9 @@ export const getCategories = async (): Promise<RequestCategoriesResponse> => {
   const response = await axios.get(url);
   return response.data;
 };
+
+export const getToken = async (): Promise<RequestTokenResponse> => {
+  const url = "https://opentdb.com/api_token.php?command=request";
+  const response = await axios.get(url);
+  return response.data;
+}
