@@ -13,7 +13,7 @@ function App() {
     setToken();
   }, []);
   return (
-    <main className="w-full h-dvh font-mulish text-text  bg-gradient-to-r from-white from-15% via-primary to-primary flex flex-col">
+    <main className="w-full h-dvh font-sour-gummy text-text  bg-gradient-to-r from-white from-15% via-primary to-primary flex flex-col">
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/trivias" element={<Trivias />} />

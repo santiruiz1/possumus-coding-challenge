@@ -12,7 +12,7 @@ export default {
         bg: '#D8D8D8'
       },
       fontFamily: {
-        'mulish': ['Mulish', 'sans-serif'],
+        'sour-gummy': ['Sour Gummy', 'sans-serif'],
       }
     },
   },
